@@ -1,4 +1,4 @@
-# CoreMailer
+# JmpCoreMailer
 
 Send email from .NET Core 2.0 with razor template Check the exmple code for details :) happy coding
 
@@ -6,7 +6,7 @@ How to Use:
 
 **To Install**
 
-    npm install CoreMailer -Version 1.0.0
+    npm install JmpCoreMailer
 
 **In Startup.cs add**
 
@@ -37,43 +37,51 @@ in the controller use following:
 **ActionMethod**
 
     public IActionResult About()
+    {
+        MailerModel mdl = new MailerModel("YourHostName",1234)
         {
-            MailerModel mdl = new MailerModel("YourHostName",1234)
+            FromAddress = "Your Address",
+            IsHtml = true,
+            User = "YourUserName",
+            Key ="YourKey",
+            ViewFile = "Emails/Register",
+            Subject = "Registration",
+            Model = new // Your actual class model
             {
-                FromAddress = "Your Address",
-                IsHtml = true,
-                User = "YourUserName",
-                Key ="YourKey",
-                ViewFile = "Emails/Register",
-                Subject = "Registration",
-                Model = new // Your actual class model
-                {
-                }
-            };
+            }
+        };
+    }
             
-            _mailer.Send(mdl);
-            return View();
+    // Enable SSL mail sending
+    _mailer.EnableSsl();
+    _mailer.Send(mdl);
+    return View();
         
 
-**UPDATE 2018-01-04**
+**UPDATE 2019-12-23**
 
 Added support to use local folder instead of using paid or free mail servers.
+
+Added supporte to use SSL to send mails.
+
+Method Mailer.SendAsync renamed - missing "c" at end of it.
 
 **HOW TO USE ?**
 
 It is really simple to use. Just create MVCMailer model with **pickup directory location**. When you send the email make sure you set sender and reciver email. Once done, you can see email in your provided pickup directory.
 
-            MailerModel mdl = new MailerModel(**"Your Directory Here"**)
-            {
-                FromAddress = "Your Address",
-                IsHtml = true,
-                User = "YourUserName",
-                Key ="YourKey",
-                ViewFile = "Emails/Register",
-                Subject = "Registration",
-                Model = new // Your actual class model
-                {
-                }
-            };
-            mdl.ToAddresses.Add("test@test.com");
-            _mailer.Send(mdl);
+    MailerModel mdl = new MailerModel(**"Your Directory Here"**)
+    {
+        FromAddress = "Your Address",
+        IsHtml = true,
+        User = "YourUserName",
+        Key ="YourKey",
+        ViewFile = "Emails/Register",
+        Subject = "Registration",
+        Model = new // Your actual class model
+        {
+        }
+    };
+    mdl.ToAddresses.Add("test@test.com");
+    _mailer.EnableSsl();
+    _mailer.Send(mdl);
