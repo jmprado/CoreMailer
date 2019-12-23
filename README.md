@@ -38,24 +38,24 @@ in the controller use following:
 
     public IActionResult About()
     {
-            MailerModel mdl = new MailerModel("YourHostName",1234)
+        MailerModel mdl = new MailerModel("YourHostName",1234)
+        {
+            FromAddress = "Your Address",
+            IsHtml = true,
+            User = "YourUserName",
+            Key ="YourKey",
+            ViewFile = "Emails/Register",
+            Subject = "Registration",
+            Model = new // Your actual class model
             {
-                FromAddress = "Your Address",
-                IsHtml = true,
-                User = "YourUserName",
-                Key ="YourKey",
-                ViewFile = "Emails/Register",
-                Subject = "Registration",
-                Model = new // Your actual class model
-                {
-                }
-            };
+            }
+        };
     }
             
-            // Enable SSL mail sending
-            _mailer.EnableSsl();
-            _mailer.Send(mdl);
-            return View();
+    // Enable SSL mail sending
+    _mailer.EnableSsl();
+    _mailer.Send(mdl);
+    return View();
         
 
 **UPDATE 2019-12-23**
@@ -70,17 +70,18 @@ Method Mailer.SendAsync renamed - missing "c" at end of it.
 
 It is really simple to use. Just create MVCMailer model with **pickup directory location**. When you send the email make sure you set sender and reciver email. Once done, you can see email in your provided pickup directory.
 
-            MailerModel mdl = new MailerModel(**"Your Directory Here"**)
-            {
-                FromAddress = "Your Address",
-                IsHtml = true,
-                User = "YourUserName",
-                Key ="YourKey",
-                ViewFile = "Emails/Register",
-                Subject = "Registration",
-                Model = new // Your actual class model
-                {
-                }
-            };
-            mdl.ToAddresses.Add("test@test.com");
-            _mailer.Send(mdl);
+    MailerModel mdl = new MailerModel(**"Your Directory Here"**)
+    {
+        FromAddress = "Your Address",
+        IsHtml = true,
+        User = "YourUserName",
+        Key ="YourKey",
+        ViewFile = "Emails/Register",
+        Subject = "Registration",
+        Model = new // Your actual class model
+        {
+        }
+    };
+    mdl.ToAddresses.Add("test@test.com");
+    _mailer.EnableSsl();
+    _mailer.Send(mdl);
