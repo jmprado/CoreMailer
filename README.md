@@ -6,7 +6,7 @@ How to Use:
 
 **To Install**
 
-    npm install CoreMailer -Version 1.0.0
+    npm install JmpCoreMailer
 
 **In Startup.cs add**
 
