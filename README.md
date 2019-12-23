@@ -58,7 +58,9 @@ in the controller use following:
 **UPDATE 2019-12-23**
 
 Added support to use local folder instead of using paid or free mail servers.
+
 Added supporte to use SSL to send mails.
+
 Method Mailer.SendAsync renamed - missing "c" at end of it.
 
 **HOW TO USE ?**
