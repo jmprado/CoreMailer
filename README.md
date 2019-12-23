@@ -37,7 +37,7 @@ in the controller use following:
 **ActionMethod**
 
     public IActionResult About()
-        {
+    {
             MailerModel mdl = new MailerModel("YourHostName",1234)
             {
                 FromAddress = "Your Address",
@@ -50,8 +50,9 @@ in the controller use following:
                 {
                 }
             };
+    }
             
-            // Enable SSL mail send
+            // Enable SSL mail sending
             _mailer.EnableSsl();
             _mailer.Send(mdl);
             return View();
