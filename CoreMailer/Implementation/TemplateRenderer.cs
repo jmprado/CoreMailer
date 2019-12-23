@@ -19,6 +19,7 @@ namespace CoreMailer.Implementation
         private readonly IRazorViewEngine _viewEngine;
         private readonly ITempDataProvider _tempDataProvider;
         private readonly IServiceProvider _serviceProvider;
+
         public TemplateRenderer(IRazorViewEngine viewEngine,
             ITempDataProvider tempDataProvider,
             IServiceProvider serviceProvider)
@@ -77,9 +78,9 @@ namespace CoreMailer.Implementation
         {
             return RenderViewAsync(name, model).Result;
         }
-	    public HtmlString RenderViewToHtml<TModel>(string name, TModel model)
-	    {
-		    return new HtmlString(RenderViewAsync(name, model).Result);
-	    }
-	}
+        public HtmlString RenderViewToHtml<TModel>(string name, TModel model)
+        {
+            return new HtmlString(RenderViewAsync(name, model).Result);
+        }
+    }
 }

@@ -10,14 +10,19 @@ namespace CoreMailer.Implementation
 {
     public class CoreMvcMailer : ICoreMvcMailer
     {
+        private bool _enableSsl = false;
         private readonly ITemplateRenderer _renderer;
-
         private readonly SmtpClient _client;
 
         public CoreMvcMailer(ITemplateRenderer renderer)
         {
             _renderer = renderer;
             _client = new SmtpClient();
+        }
+
+        public void EnableSsl()
+        {
+            _enableSsl = true;
         }
 
         public void Send(MailerModel mailer)
@@ -41,7 +46,6 @@ namespace CoreMailer.Implementation
                     messageBody = mailer.Message;
                 }
                     
-
                 var emailMessage =
                     new MailMessage()
                     {
@@ -88,18 +92,20 @@ namespace CoreMailer.Implementation
 	            {
 					_client.Host = mailer.Host;
 		            _client.Port = mailer.Port;
+
+                    if (_enableSsl)
+                        _client.EnableSsl = true;
+
+                    _client.UseDefaultCredentials = false;
 		            _client.Credentials = new NetworkCredential(mailer.User, mailer.Key);
 				}
 
-                
-
                 _client.Send(emailMessage);
-
             }
         }
 
 
-        public async Task SendAsyn(MailerModel mailer)
+        public async Task SendAsync(MailerModel mailer)
         {
             await Task.Run(() =>
             {

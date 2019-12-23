@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Net;
 using System.Net.Mail;
-using System.Text;
 
 namespace CoreMailer.Models
 {
@@ -53,8 +51,8 @@ namespace CoreMailer.Models
 			ReplyTo = new List<string>();
 			CC = new List<string>();
 			BCC = new List<string>();
-
 		}
+
 		public MailerModel(string pickupDirectory)
 		{
 			ToAddresses = new List<string>();
@@ -66,8 +64,8 @@ namespace CoreMailer.Models
 			Port = 80;
 			UsePickupDirectory = true;
 			PickupPath = pickupDirectory;
-
 		}
+
 		public bool IsValid()
 		{
 			if (UsePickupDirectory)
@@ -77,7 +75,8 @@ namespace CoreMailer.Models
 			var context = new ValidationContext(this);
 			var result = new List<ValidationResult>();
 			var valid = Validator.TryValidateObject(this, context, result, true);
-			if (valid == false)
+			
+			if (!valid)
 			{
 				var exceptionMessage = string.Join(",", result.Select(x => x.ErrorMessage));
 				throw new Exception(exceptionMessage);

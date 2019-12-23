@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoreMailer\CoreMailer.csproj" />
+    <ProjectReference Include="..\CoreMailer\JmpCoreMailer.csproj" />
   </ItemGroup>
 
 </Project>
