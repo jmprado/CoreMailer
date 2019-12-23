@@ -51,6 +51,8 @@ in the controller use following:
                 }
             };
             
+            // Enable SSL mail send
+            _mailer.EnableSsl();
             _mailer.Send(mdl);
             return View();
         
